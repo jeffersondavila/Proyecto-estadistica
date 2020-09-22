@@ -1,0 +1,7 @@
+﻿  menu.cpp
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(141,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(147,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(155,8): warning C4101: 'acum1': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(175,15): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(177,16): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  menu.vcxproj -> C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\Debug\menu.exe

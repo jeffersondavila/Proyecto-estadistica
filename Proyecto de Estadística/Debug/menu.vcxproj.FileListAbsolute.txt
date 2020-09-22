@@ -1,0 +1,4 @@
+C:\Users\Jeff\Desktop\c++\menu\Debug\menu.exe
+C:\Users\Jeff\Desktop\c++\menu\Debug\menu.pdb
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\Debug\menu.exe
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\Debug\menu.pdb
