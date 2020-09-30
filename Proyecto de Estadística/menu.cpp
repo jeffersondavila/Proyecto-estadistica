@@ -19,8 +19,10 @@ void gotoxy(int x, int y)
 
 using namespace std;
 
-int CantidadDatos, i, j;
-float respuesta[100], n, aux, Ancho_Intervalo = 0;
+int CantidadDatos, i, j, x, sum;
+float respuesta[100], frecuencia[100], temp, n, aux, Ancho_Intervalo = 0, nMayor = 0, nMenor, contadorIntervalos, Intervalo;
+
+
 
 void INGRESARDATOS() {
 	int x = 30, y = 5, x1 = 90, y1 = 5;
@@ -55,38 +57,46 @@ void MODIFICARDATOS() {
 	}
 	//imprimimos la lista de datos ya ordenados
 	gotoxy(70, 5); cout << "INGRESE POSICION DE DATO QUE QUIERA CAMBIAR:"; cin >> posicion;
-	for (i = 0; i <= posicion; i++)
+	if (posicion < CantidadDatos)
 	{
-		if (i == posicion)
+		for (i = 0; i <= posicion; i++)
 		{
-			gotoxy(70, 6); cout << "INGRESE NUEVO DATO: "; cin >> respuesta[i];
-			cout << respuesta[i];
-		}
-	}
-	//se guarda la modificación y en los dos vectores
-	system("cls");
-	for (i = 0; i < CantidadDatos; i++) {
-		for (j = i + 1; j < CantidadDatos; j++) {
-			if (respuesta[i] > respuesta[j]) {
-				aux = respuesta[i];
-				respuesta[i] = respuesta[j];
-				respuesta[j] = aux;
+			if (i == posicion)
+			{
+				gotoxy(70, 6); cout << "INGRESE NUEVO DATO: "; cin >> respuesta[i];
+				cout << respuesta[i];
 			}
 		}
+		//se guarda la modificación y en los dos vectores
+		system("cls");
+		for (i = 0; i < CantidadDatos; i++) {
+			for (j = i + 1; j < CantidadDatos; j++) {
+				if (respuesta[i] > respuesta[j]) {
+					aux = respuesta[i];
+					respuesta[i] = respuesta[j];
+					respuesta[j] = aux;
+				}
+			}
+		}
+		//se ordena los vectores con la modificación ya echa
+		gotoxy(x1, 2); cout << "LA NUEVA LISTA DE DATOS INGRESADOS ES:"; x1 = 10, y1 = 5;
+		for (i = 0; i < CantidadDatos; i++)
+		{
+			gotoxy(x1, y1); cout << i << ".\t" << respuesta[i];
+			y1++;
+		}
+		//se imprime la lista del vector con los datos ya ordenados
 	}
-	//se ordena los vectores con la modificación ya echa
-	gotoxy(x1, 2); cout << "LA NUEVA LISTA DE DATOS INGRESADOS ES:"; x1 = 10, y1 = 5;
-	for (i = 0; i < CantidadDatos; i++)
+	else
 	{
-		gotoxy(x1, y1); cout << i << ".\t" << respuesta[i];
-		y1++;
+		system("cls");
+		gotoxy(70, 5); cout << "LA POSICIÓN NO FUE ENCONTRADA, INTENTELO NUEVAMENTE";
 	}
-	//se imprime la lista del vector con los datos ya ordenados
 	system("pause>null");
 };
 void CONTARREPETICIONES() {
-	int sum, j, x = 25, y = 10;
-	for (i = 0; i < 200; i++) {
+	int j, x = 25, y = 10;
+	for (i = 0; i < 300; i++) {
 		sum = 0;
 		for (j = 0; j < CantidadDatos; j++) {
 			if (i == respuesta[j]) {
@@ -94,12 +104,15 @@ void CONTARREPETICIONES() {
 			}
 		}
 		if (0 < sum && sum < 2) {//si es mayor a 0 el contador es porque se repite el numero
-			gotoxy(x, y); cout << "El número " << i << " se repite " << sum << " vez.";
+			gotoxy(x, y); cout << "El número " << float(i) << " se repite " << sum << " vez.";
+			frecuencia[i] = sum;
 			y++;
 		}
 		if (sum >= 2)
 		{
-			gotoxy(x, y); cout << "El número " << i << " se repite " << sum << " veces.";
+			gotoxy(x, y); cout << "El número " << float(i) << " se repite " << sum << " veces.";
+			frecuencia[i] = sum;
+			cout << frecuencia[i];
 			y++;
 		}
 	}
@@ -116,46 +129,119 @@ void DATOSORDENADOS() {
 	CONTARREPETICIONES();
 	system("pause>null");
 };
-void DISTRIBUCION_DE_FRECUENCIAS() {
-	float nMayor = 0, nMenor, Intervalo = 0, acumulado = 0;
-	int Rango = 0;
-
+void MAYOR_Y_MENOR() {
+	int x = 15, y = 5;
+	//NUMERO MAYOR
 	for (i = 0; i < CantidadDatos; i++)
 	{
 		if (respuesta[i] > nMayor) {
 			nMayor = respuesta[i];
 		}
 	}
-	cout << "EL NUMERO MAYOR ES: " << nMayor;
-
+	gotoxy(x, y); cout << "EL NUMERO MAYOR ES: " << nMayor;
+	//NUMERO MENOR
 	nMenor = nMayor;
-
 	for (i = 0; i < CantidadDatos; i++)
 	{
 		if (respuesta[i] < nMenor) {
 			nMenor = respuesta[i];
 		}
 	}
-	cout << "\n\nEL NUMERO MENOR ES: " << nMenor;
-	cout << "\n\n------------------------------------";
+	gotoxy(65, y); cout << "Y EL NUMERO MENOR ES: " << nMenor;
+};
+void CALCULOS_TABLA() {
+	int Rango = 0, x = 15, y = 5;
 	Rango = nMayor - nMenor;
 
-	//Rango
-	cout << "\n\nEl RANGO ES: " << Rango;
+	//RANGO
+	gotoxy(x, 6); cout << "EL RANGO ES DE: " << Rango;
 
-	//Intervalo
+	//INTERVALO
 	Intervalo = 1 + 3.3 * log10(CantidadDatos);
-	cout << "\n\nEl INTERVALO ES: " << Intervalo;
+	gotoxy(65, 6); cout << "EL INTERVALO ES DE: " << Intervalo;
 
-	//Ancho del Intervalo
+	//ANCHO DEL INTERVALO
 	Ancho_Intervalo = Rango / Intervalo;
-	cout << "\n\nEl ANCHO DEL INTERVALO ES: " << Ancho_Intervalo << "\n\n";
+	gotoxy(105, 6); cout << "Y EL ANCHO DEL INTERVALO ES DE: " << Ancho_Intervalo << "\n\n";
+};
+void NUMERO_DE_INTERVALOS() {
+	/*for (x = nMenor; x <= nMayor; x++)
+	{
+		contadorIntervalos = x + Ancho_Intervalo;
+		cout << x << "-" << fixed << setprecision(2) << contadorIntervalos << endl;
+		x = contadorIntervalos - 1;
+	}*/
 
+	/*
+	float decimal;
+	int entero;
+	entero = Ancho_Intervalo;
+	cout << endl << "El entero es: " << entero << endl;
 
+	decimal = Ancho_Intervalo - entero;
+	cout << endl << "Los decimales son: "<< decimal << endl;*/
+	/*float decimal;
+	int entero;
+	for (x = nMenor; x < nMayor; x++)
+	{
+		contadorIntervalos = x + Ancho_Intervalo;
+		entero = contadorIntervalos;
+		decimal = contadorIntervalos - entero;
 
+		frecuencia[x] = contadorIntervalos;
+
+		cout << x << " - " << fixed << setprecision(2) << frecuencia[x] << endl;
+		x = float(frecuencia[x]) + decimal - 1;
+	}*/
+
+	float Intervalo2[50][2];
+	float auxiliar;
+	auxiliar = respuesta[0];
+	int x, y;
+
+	for (x = 0; x < Intervalo; x++)
+	{
+		for (y = 0; y < 2; y++)
+		{
+			Intervalo2[x][y] = auxiliar;
+			if (y == 1)
+			{
+				auxiliar = Intervalo2[x][y];
+			}
+			else
+			{
+				auxiliar = auxiliar + Ancho_Intervalo;
+			}
+			if (Intervalo2[x][y] > nMayor)
+			{
+				x = 50;
+			}
+		}
+	}
+
+	for (x = 0; x < Intervalo; x++)
+	{
+		for (y = 0; y < 2; y++)
+		{
+			cout << Intervalo2[x][y] << "   ";
+
+			if (Intervalo2[x][y] > nMayor)
+			{
+				x = 50;
+			}
+		}
+		cout << endl;
+	}
+
+};
+void DISTRIBUCION_DE_FRECUENCIAS() {
+	////////////////////CALCULOS////////////////////
+	MAYOR_Y_MENOR();
+	CALCULOS_TABLA();
+	////////////////////TABLA////////////////////
+	NUMERO_DE_INTERVALOS();
 	system("pause>null");
 };
-
 void menu() {
 	int opcion = 0;
 	do
@@ -211,7 +297,6 @@ void menu() {
 	} while (opcion != 8);
 
 };
-
 int main()
 {
 	setlocale(LC_CTYPE, "Spanish");
