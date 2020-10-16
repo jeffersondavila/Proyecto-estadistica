@@ -1,8 +1,6 @@
 ﻿  menu.cpp
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(108,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(114,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(154,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(160,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(259,15): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(261,16): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(144,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(150,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(246,15): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(248,16): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
   menu.vcxproj -> C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\Debug\menu.exe
