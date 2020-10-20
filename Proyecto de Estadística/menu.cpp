@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <iomanip>
-#include <stdio.h>
 
 void gotoxy(int x, int y)
 {
@@ -20,20 +19,30 @@ void gotoxy(int x, int y)
 
 using namespace std;
 
-int CantidadDatos, i, j, k;
-float respuesta[100], frecuencia[100], temp, n, aux, Ancho_Intervalo = 0, nMayor = 0, nMenor, contadorIntervalos, sum;
-float Intervalo, Intervalo2[100][2], Intervalo3[100][1], auxiliar, contadorFrecuenciaAbs[100], marcaDeClase[100 * 2], contadorMarcaDeClase = 0;
-float marcaDeClase2[100 * 1];
+int CantidadDatos, i, j, x, y;
+float respuesta[100], temp, n, aux, Ancho_Intervalo = 0, nMayor = 0, nMenor, contadorIntervalos, sum;
+float Intervalo = 0, auxiliar, vectora[100], vectorb[100], marca_de_clase[100];
 
 void INGRESARDATOS() {
 	int x = 30, y = 5, x1 = 90, y1 = 5;
+
 	gotoxy(x, 2); cout << "INGRESE LA CANTIDAD TOTAL DE DATOS  NÚMERICOS: \t"; cin >> CantidadDatos;
+	for (int x = 88; x <= 117; x++)
+	{
+		gotoxy(x, 4); putchar('-');
+	}
 	gotoxy(x1, 2); cout << "LISTA DE DATOS INGRESADOS:";
 	for (i = 0; i < CantidadDatos; i++)
 	{
 		gotoxy(x, y); cout << "INGRESE EL DATO # " << i + 1 << "\t"; cin >> respuesta[i];
 		gotoxy(x1, y1); cout << i + 1 << ".\t" << respuesta[i];
+		gotoxy(88, y1); putchar('|');
+		gotoxy(117, y1); putchar('|');
 		y++, y1++;
+	}
+	for (int x = 88; x <= 117; x++)
+	{
+		gotoxy(x, y1); putchar('-');
 	}
 	//CAPTURAR LOS DATOS EN RESPUESTA Y CONTARREPETICONES
 	for (i = 0; i < CantidadDatos; i++) {
@@ -95,20 +104,26 @@ void MODIFICARDATOS() {
 	}
 	system("pause>null");
 };
-void CONTADOR_DE_DECIMALES() {
-	for (i = 0; i < CantidadDatos; i++)
-	{
-		for (j = 0; j < CantidadDatos; j++)
-		{
-			if (respuesta[i] == respuesta[j])
-				contadorFrecuenciaAbs[i]++;
+void CONTARREPETICIONES() {
+	for (int q = 0; q < 300; q++) {
+		sum = 0;
+		for (j = 0; j < CantidadDatos; j++) {
+			if (respuesta[q] == respuesta[j]) {
+				sum = sum + 1;
+			}
 		}
-		cout << "\nEl numero " << respuesta[i] << " se repite " << contadorFrecuenciaAbs[i] << endl;
-		contadorFrecuenciaAbs[i] = 0;
+		if (0 < sum && sum < 2) {//si es mayor a 0 el contador es porque se repite el numero
+			gotoxy(x, y); cout << "El número " << respuesta[q] << " se repite " << sum << " vez.";
+			y++;
+		}
+		if (sum >= 2)
+		{
+			gotoxy(x, y); cout << "El número " << respuesta[q] << " se repite " << sum << " veces.";
+			y++;
+		}
 	}
-}
-void DATOSORDENADOS() {
-	int  x = 25, y = 5;
+
+	x = 25, y = 5;
 	gotoxy(x, 5); cout << "LISTADO DE DATOS ORDENADOS: ";
 	x = 55;
 	for (i = 0; i < CantidadDatos; i++) {
@@ -116,11 +131,56 @@ void DATOSORDENADOS() {
 		x = x + 7;
 	}
 	//se imprime la lista con los datos ordenados
-	CONTADOR_DE_DECIMALES();
 	system("pause>null");
 };
-void MAYOR_Y_MENOR() {
-	int x = 15, y = 5;
+void FRECUENCIAABSOLUTA() {
+	int y = 10;
+	float inicial = 0, sumador = 0, sumador2;
+	inicial = nMenor;
+	sumador = nMenor + Ancho_Intervalo;
+
+	for (int i = 0; i < Intervalo; i++)
+	{
+		gotoxy(15, y); cout << setprecision(3) << inicial << "\t\t" << setprecision(3) << sumador << endl;
+		vectora[i] = inicial;
+		vectorb[i] = sumador;
+
+		inicial = sumador;
+		sumador = sumador + Ancho_Intervalo;
+		y++;
+	}
+	y = 10;
+	for (int i = 0; i < Intervalo; i++)
+	{
+		sumador2 = 0;
+		for (int j = 0; j < CantidadDatos; j++)
+		{
+			if (respuesta[j] >= vectora[i] && respuesta[j] < vectorb[i])
+			{
+				sumador2++;
+			}
+		}
+		if (sumador2 > 0)
+		{
+			gotoxy(45, y); cout << sumador2 << endl;
+		}
+		y++;
+	}
+
+
+};
+void MARCADECLASE() {
+	int intervaloizq = 0, intervaloder = 0;
+	for (int i = 0; i < Intervalo; i++)
+	{
+		marca_de_clase[i] = (vectora[i] + vectorb[i]) / 2;
+		cout << marca_de_clase[i] << endl;
+	}
+};
+void DISTRIBUCION_DE_FRECUENCIAS() {
+	float acumulado = 0;
+	int Rango = 0, x = 5;
+
 	//NUMERO MAYOR
 	for (i = 0; i < CantidadDatos; i++)
 	{
@@ -128,7 +188,7 @@ void MAYOR_Y_MENOR() {
 			nMayor = respuesta[i];
 		}
 	}
-	gotoxy(x, y); cout << "EL NUMERO MAYOR ES: " << nMayor;
+	gotoxy(x, 5); cout << "EL NUMERO MAYOR ES: " << nMayor;
 	//NUMERO MENOR
 	nMenor = nMayor;
 	for (i = 0; i < CantidadDatos; i++)
@@ -137,96 +197,23 @@ void MAYOR_Y_MENOR() {
 			nMenor = respuesta[i];
 		}
 	}
-	gotoxy(65, y); cout << "Y EL NUMERO MENOR ES: " << nMenor;
-};
-void CALCULOS_TABLA() {
-	int Rango = 0, x = 15, y = 5;
+	gotoxy(30, 5); cout << "EL NUMERO MENOR ES: " << nMenor;
 	Rango = nMayor - nMenor;
 
 	//RANGO
-	gotoxy(x, 6); cout << "EL RANGO ES DE: " << Rango;
+	gotoxy(57, 5); cout << "EL RANGO ES DE: " << Rango;
 
 	//INTERVALO
 	Intervalo = 1 + 3.3 * log10(CantidadDatos);
-	gotoxy(65, 6); cout << "EL INTERVALO ES DE: " << Intervalo;
+	gotoxy(x, 7); cout << "EL INTERVALO ES DE: " << Intervalo;
 
 	//ANCHO DEL INTERVALO
 	Ancho_Intervalo = Rango / Intervalo;
-	gotoxy(105, 6); cout << "Y EL ANCHO DEL INTERVALO ES DE: " << Ancho_Intervalo << "\n\n";
-};
-void NUMERO_DE_INTERVALOS() {
-	
-	auxiliar = respuesta[0];
+	gotoxy(35, 7); cout << "Y EL ANCHO DEL INTERVALO ES DE: " << Ancho_Intervalo << "\n\n";
 
-	for (i = 0; i < Intervalo; i++)
-	{
-		for (j = 0; j < 2; j++)
-		{
-			Intervalo2[i][j] = auxiliar;
-			if (j == 1)
-			{
-				auxiliar = Intervalo2[i][j];
-			}
-			else
-			{
-				auxiliar = auxiliar + Ancho_Intervalo;
-			}
-			if (Intervalo2[i][j] > nMayor)
-			{
-				i = 100;
-			}
-		}
-	}
-
-	for (i = 0; i < Intervalo; i++)
-	{
-		for (j = 0; j < 2; j++)
-		{
-			cout << fixed << setprecision(2) << Intervalo2[i][j] << "   ";
-
-			if (Intervalo2[i][j] > nMayor)
-			{
-				i = 100;
-			}
-		}
-		cout << endl;
-	}
-};
-void FRECUENCIA_ABSOLUTA() {
-	int prueba = 0, prueba2 = 0;
-	k = 0;
-	for (i = 0; i < CantidadDatos; i++)
-	{
-		for (j = 0; j < 2; j++)
-		{
-			marcaDeClase[k] = Intervalo2[i][j];
-			k++;
-		}
-		cout << endl;
-	}
-	
-	//Matriz convertida a Vector
-	for (i = 0; i < k; i++) {
-		cout << marcaDeClase[i] << endl;
-	}
-
-	for (i = 0; i < Intervalo && i < k; i++)
-	{
-		if ((marcaDeClase[i] >= respuesta[i]) && (marcaDeClase[i] < respuesta[i]))
-		{
-			contadorMarcaDeClase++;
-		}
-		cout << "\n\n";
-		cout << contadorMarcaDeClase << endl;
-	}
-};//PENDIENTE
-void DISTRIBUCION_DE_FRECUENCIAS() {
-	////////////////////CALCULOS////////////////////
-	MAYOR_Y_MENOR();
-	CALCULOS_TABLA();
 	////////////////////TABLA////////////////////
-	NUMERO_DE_INTERVALOS();
-	FRECUENCIA_ABSOLUTA();
+	FRECUENCIAABSOLUTA();
+	MARCADECLASE();
 	system("pause>null");
 };
 void menu() {
@@ -271,7 +258,7 @@ void menu() {
 			break;
 		case 3:
 			system("cls");
-			DATOSORDENADOS();
+			CONTARREPETICIONES();
 			break;
 		case 4:
 			system("cls");
