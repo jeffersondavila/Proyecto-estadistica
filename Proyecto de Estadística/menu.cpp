@@ -22,7 +22,7 @@ using namespace std;
 int CantidadDatos, i, j, x, y;
 float respuesta[100], temp, n, aux, Ancho_Intervalo = 0, nMayor = 0, nMenor, sum;
 float Intervalo = 0, auxiliar, vectora[100], vectorb[100], marca_de_clase[100], FrecuenciaAcum[100], FrecuenciaRel[100], FrecuenciaRelDesc[100];
-float calculoPromedio = 0, mcMprom2, x1, x2, x4;
+float calculoPromedio = 0, mcMprom2, Media, x1, x2, x4;
 
 void INGRESARDATOS() {
 	int x = 30, y = 5, x1 = 90, y1 = 5;
@@ -289,6 +289,22 @@ void XmPCF() {
 		y++;
 	}
 }
+void MEDIA() {
+	int y = 10;
+	float mcMprom = 0;
+	for (int i = 0; i < Intervalo; i++)
+	{
+		calculoPromedio = FrecuenciaAcum[i] * marca_de_clase[i];
+		mcMprom = mcMprom + calculoPromedio;
+	}
+	Media = mcMprom / CantidadDatos;
+	cout << "\nX = " << mcMprom << " / " << CantidadDatos << " = " << Media;
+}
+void MEDIANA() {
+	float posicion;
+	posicion = CantidadDatos / 2;
+	cout << CantidadDatos << " / 2 = " << posicion;
+}
 void DISTRIBUCION_DE_FRECUENCIAS() {
 	float acumulado = 0;
 	int Rango = 0, x = 5;
@@ -339,6 +355,15 @@ void DISTRIBUCION_DE_FRECUENCIAS() {
 
 	system("pause>null");
 };
+void MEDIDAS_DE_TENDENCIA_CENTRAL() {
+	cout << "MEDIDAS DE TENDENCIA CENTRAL" << endl;
+	cout << "\nMEDIA (PROMEDIO)" << endl;
+	MEDIA();
+	cout << "\nMEDIANA" << endl;
+	MEDIANA();
+
+	system("pause>null");
+}
 void menu() {
 	int opcion = 0;
 	do
@@ -386,6 +411,10 @@ void menu() {
 		case 4:
 			system("cls");
 			DISTRIBUCION_DE_FRECUENCIAS();
+			break;
+		case 5:
+			system("cls");
+			MEDIDAS_DE_TENDENCIA_CENTRAL();
 			break;
 		default:
 			system("cls");
