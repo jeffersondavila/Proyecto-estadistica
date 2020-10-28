@@ -20,7 +20,7 @@ using namespace std;
 int i, j, x, y;
 float Respuesta[100];
 float Datos[100], CantidadDatos, aux;
-float nMenor, nMayor, Ancho_Intervalo, Intervalo, acumulado; int Rango;
+float nMenor, nMayor, Ancho_Intervalo, Intervalo, acumulado, Rango;
 float vectora[100], vectorb[100], FrecuenciaAbsoluta[100], inicial = 0, sumador = 0, sumador2;
 float marca_de_clase[100];
 float FrecuenciaAbsolutaAcumulada[100], acumulador = 0;
@@ -133,7 +133,7 @@ void NumeroMenor() {
 }
 void RANGO() {
 	Rango = nMayor - nMenor;
-	gotoxy(90, 5); cout << "EL RANGO ES DE: " << setprecision(2) << Rango;
+	gotoxy(90, 5); cout << "EL RANGO ES DE: " << Rango;
 }
 void INTERVALO() {
 	Intervalo = 1 + 3.3 * log10(CantidadDatos);
@@ -450,8 +450,233 @@ void MODA() {
 		}
 	}
 }
+void CUARTIL() {
+	float calculo1, calculo2, calculo3, calculo4, totalCuartil, auxi[100], encontrado2 = 0, numero, posicion2;
+	bool encontrado = false;
+	aux = 650;
+
+	gotoxy(69, 21); cout << "INGRESE EL NÚMERO DEL CUARTIL: ";
+	gotoxy(101, 21); cin >> numero;
+
+	posicion2 = numero * CantidadDatos / 4;
+
+	gotoxy(68, 24); cout << "Posicion = " << numero << " * " << CantidadDatos << " / 4 = " << posicion2 << endl;
+	
+	for (int i = 0; i < Intervalo; i++)
+	{
+		for (int x = 60; x <= 112; x++)
+		{
+			gotoxy(x, 18);
+			putchar('-');
+			gotoxy(x, 26);
+			putchar('-');
+			gotoxy(x, 39);
+			putchar('-');
+		}
+
+		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
+		{
+			gotoxy(72, 28); cout << "**********CUARTIL**********";
+			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+			gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+			gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+			calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo3 = calculo1 / calculo2;
+			calculo4 = calculo3 * Ancho_Intervalo;
+			totalCuartil = vectora[i] + calculo4;
+			gotoxy(65, 36); cout << " CUARTIL: " << totalCuartil << endl;
+			encontrado = true;
+			encontrado = 1;
+		}
+		if (FrecuenciaAbsolutaAcumulada[i] > posicion2)
+		{
+			if (aux > FrecuenciaAbsolutaAcumulada[i])
+			{
+				aux = FrecuenciaAbsolutaAcumulada[i];
+			}
+		}
+	}
+	if (encontrado == false && encontrado2 == 0)
+	{
+		float acum = 0;
+		acum = aux - posicion2;
+		for (int i = 0; i < Intervalo; i++)
+		{
+			if (aux == FrecuenciaAbsolutaAcumulada[i])
+			{
+				gotoxy(72, 28); cout << "**********CUARTIL**********";
+				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+				gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+				gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+				calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo3 = calculo1 / calculo2;
+				calculo4 = calculo3 * Ancho_Intervalo;
+				totalCuartil = vectora[i] + calculo4;
+				gotoxy(65, 36); cout << " CUARTIL: " << totalCuartil << endl;
+			}
+		}
+	}
+
+	system("pause>null");
+}
+void DECIL() {
+	float calculo1, calculo2, calculo3, calculo4, totalDecil, auxi[100], encontrado2 = 0, numero, posicion2;
+	bool encontrado = false;
+	aux = 650;
+
+	gotoxy(69, 21); cout << "INGRESE EL NÚMERO DEL DECIL: ";
+	gotoxy(101, 21); cin >> numero;
+
+	posicion2 = numero * CantidadDatos / 10;
+
+	gotoxy(68, 24); cout << "Posicion = " << numero << " * " << CantidadDatos << " / 10 = " << posicion2 << endl;
+
+	for (int i = 0; i < Intervalo; i++)
+	{
+		for (int x = 60; x <= 112; x++)
+		{
+			gotoxy(x, 18);
+			putchar('-');
+			gotoxy(x, 26);
+			putchar('-');
+			gotoxy(x, 39);
+			putchar('-');
+		}
+
+		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
+		{
+			gotoxy(72, 28); cout << "**********DECIL**********";
+			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+			gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+			gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+			calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo3 = calculo1 / calculo2;
+			calculo4 = calculo3 * Ancho_Intervalo;
+			totalDecil = vectora[i] + calculo4;
+			gotoxy(65, 36); cout << " DECIL: " << totalDecil << endl;
+			encontrado = true;
+			encontrado = 1;
+		}
+		if (FrecuenciaAbsolutaAcumulada[i] > posicion2)
+		{
+			if (aux > FrecuenciaAbsolutaAcumulada[i])
+			{
+				aux = FrecuenciaAbsolutaAcumulada[i];
+			}
+		}
+	}
+	if (encontrado == false && encontrado2 == 0)
+	{
+		float acum = 0;
+		acum = aux - posicion2;
+		for (int i = 0; i < Intervalo; i++)
+		{
+			if (aux == FrecuenciaAbsolutaAcumulada[i])
+			{
+				gotoxy(72, 28); cout << "**********DECIL**********";
+				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+				gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+				gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+				calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo3 = calculo1 / calculo2;
+				calculo4 = calculo3 * Ancho_Intervalo;
+				totalDecil = vectora[i] + calculo4;
+				gotoxy(65, 36); cout << " DECIL: " << totalDecil << endl;
+			}
+		}
+	}
+
+	system("pause>null");
+}
+void PERCENTIL() {
+	float calculo1, calculo2, calculo3, calculo4, totalPercentil, auxi[100], encontrado2 = 0, numero, posicion2;
+	bool encontrado = false;
+	aux = 650;
+
+	gotoxy(69, 21); cout << "INGRESE EL NÚMERO DEL PERCENTIL: ";
+	gotoxy(101, 21); cin >> numero;
+
+	posicion2 = numero * CantidadDatos / 100;
+
+	gotoxy(68, 24); cout << "Posicion = " << numero << " * " << CantidadDatos << " / 100 = " << posicion2 << endl;
+
+	for (int i = 0; i < Intervalo; i++)
+	{
+		for (int x = 60; x <= 112; x++)
+		{
+			gotoxy(x, 18);
+			putchar('-');
+			gotoxy(x, 26);
+			putchar('-');
+			gotoxy(x, 39);
+			putchar('-');
+		}
+
+		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
+		{
+			gotoxy(72, 28); cout << "**********PERCENTIL**********";
+			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+			gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+			gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+			calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+			calculo3 = calculo1 / calculo2;
+			calculo4 = calculo3 * Ancho_Intervalo;
+			totalPercentil = vectora[i] + calculo4;
+			gotoxy(65, 36); cout << " PERCENTIL: " << totalPercentil << endl;
+			encontrado = true;
+			encontrado = 1;
+		}
+		if (FrecuenciaAbsolutaAcumulada[i] > posicion2)
+		{
+			if (aux > FrecuenciaAbsolutaAcumulada[i])
+			{
+				aux = FrecuenciaAbsolutaAcumulada[i];
+			}
+		}
+	}
+	if (encontrado == false && encontrado2 == 0)
+	{
+		float acum = 0;
+		acum = aux - posicion2;
+		for (int i = 0; i < Intervalo; i++)
+		{
+			if (aux == FrecuenciaAbsolutaAcumulada[i])
+			{
+				gotoxy(72, 28); cout << "**********PERCENTIL**********";
+				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
+				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
+				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
+				gotoxy(65, 33); cout << " POSICIÓN: " << posicion2 << endl;
+				gotoxy(65, 34); cout << " ANCHO DE INTERVALO: " << Ancho_Intervalo << endl;
+				calculo1 = posicion2 - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo2 = FrecuenciaAbsolutaAcumulada[i] - FrecuenciaAbsolutaAcumulada[i - 1];
+				calculo3 = calculo1 / calculo2;
+				calculo4 = calculo3 * Ancho_Intervalo;
+				totalPercentil = vectora[i] + calculo4;
+				gotoxy(65, 36); cout << " PERCENTIL: " << totalPercentil << endl;
+			}
+		}
+	}
+
+	system("pause>null");
+}
 void menu() {
-	int opcion = 0;
+	int opcion = 0, opcion2 = 0;
 	do
 	{
 		system("cls");
@@ -503,6 +728,49 @@ void menu() {
 			MEDIANA();
 			MODA();
 			system("pause>null");
+			break;
+		case 7:
+			do {
+				system("cls");
+				for (int x = 65; x <= 93; x++)
+				{
+					gotoxy(x, 13);
+					putchar('-');
+					gotoxy(x, 27);
+					putchar('-');
+				}
+				for (float y = 14; y <= 26; y++)
+				{
+					gotoxy(65, y);
+					putchar('|');
+					gotoxy(93, y);
+					putchar('|');
+				}
+				gotoxy(70, 10); cout << "* MENÚ DISPERCIÓN *";
+				gotoxy(70, 16); cout << "CUARTIL.......... 1";
+				gotoxy(70, 18); cout << "DECIL............ 2";
+				gotoxy(70, 20); cout << "PERCENTIL........ 3";
+				gotoxy(70, 22); cout << "REGRESAR......... 4";
+				gotoxy(80, 24); cout << "OPCIÓN: ";
+				gotoxy(88, 24); cin >> opcion2;
+				switch (opcion2) {
+				case 1:
+					system("cls");
+					CUARTIL();
+					break;
+				case 2:
+					system("cls");
+					DECIL();
+					break;
+				case 3:
+					system("cls");
+					PERCENTIL();
+					break;
+				default:
+					system("cls");
+					break;
+				}
+			} while (opcion2 != 4);
 			break;
 		default:
 			system("cls");

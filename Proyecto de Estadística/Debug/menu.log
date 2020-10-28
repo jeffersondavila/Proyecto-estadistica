@@ -1,8 +1,12 @@
 ﻿  menu.cpp
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(135,17): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(139,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(340,52): warning C4101: 'auxi': variable local sin referencia
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(394,59): warning C4101: 'auxi': variable local sin referencia
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(465,15): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(467,16): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(396,59): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(454,62): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(529,60): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(604,64): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(692,15): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(694,16): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(744,17): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(746,17): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
   menu.vcxproj -> C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\Debug\menu.exe
