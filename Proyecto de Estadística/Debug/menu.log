@@ -1,7 +1,7 @@
 ﻿  menu.cpp
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(222,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(466,52): warning C4101: 'auxi': variable local sin referencia
-C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(533,59): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(223,16): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(470,52): warning C4101: 'auxi': variable local sin referencia
+C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(537,59): warning C4101: 'auxi': variable local sin referencia
 C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(644,62): warning C4101: 'auxi': variable local sin referencia
 C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(719,60): warning C4101: 'auxi': variable local sin referencia
 C:\Users\Jeff\Desktop\Proyecto Estadística 1\Proyecto de Estadística\menu.cpp(794,64): warning C4101: 'auxi': variable local sin referencia

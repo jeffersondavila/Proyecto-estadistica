@@ -18,6 +18,7 @@ void gotoxy(int x, int y)
 
 using namespace std;
 int i, j, x, y;
+float auxiXmPCF;
 float ejey;
 float Datos[100], CantidadDatos, aux;
 float nMenor, nMayor, Ancho_Intervalo, Intervalo, acumulado, Rango;
@@ -216,7 +217,7 @@ void NumeroMenor() {
 }
 void RANGO() {
 	Rango = nMayor - nMenor;
-	gotoxy(51, 5); cout << "|RANGO: " << setprecision(2) << Rango;
+	gotoxy(51, 5); cout << "|RANGO: " << Rango;
 }
 void INTERVALO() {
 	Intervalo = 1 + 3.3 * log10(CantidadDatos);
@@ -387,19 +388,22 @@ void XmPCUADRADO() {
 		y++;
 	}
 	gotoxy(135, y + 1); cout << "|" << auxi;
-	gotoxy(150, y + 1); cout << "|";
 }
 void XmPCF() {
-	float x3;
+	float x3, auxiXmPCF2 = 0;
 	y = 11;
 	for (int i = 0; i < Intervalo; i++)
 	{
 		gotoxy(150, 9); cout << "|(Xi - X)^2 * fi|";
 		x3 = ((marca_de_clase[i] - mcMprom2) * (marca_de_clase[i] - mcMprom2)) * FrecuenciaAbsoluta[i];
+		auxiXmPCF2 = auxiXmPCF2 + x3;
 		gotoxy(150, y); cout << "|" << x3 << endl;
 		gotoxy(166, y); cout << "|",
 			y++;
 	}
+	auxiXmPCF = auxiXmPCF2;
+	gotoxy(150, y + 1); cout << "|" << auxiXmPCF;
+	gotoxy(166, y + 1); cout << "|";
 }
 void DISTRIBUCION_DE_FRECUENCIAS() {
 	for (int x = 5; x <= 166; x++)
@@ -451,7 +455,7 @@ void MEDIA() {
 		putchar('-');
 	}
 
-	gotoxy(72, 10); cout << "**MEDIA**";
+	gotoxy(72, 10); cout << "MEDIA";
 	for (int i = 0; i < Intervalo; i++)
 	{
 		calculoPromedio = FrecuenciaAbsoluta[i] * marca_de_clase[i];
@@ -475,7 +479,7 @@ void MEDIANA() {
 
 	posicion = CantidadDatos / 2;
 
-	gotoxy(72, 19); cout << "**MEDIANA**";
+	gotoxy(72, 19); cout << "MEDIANA";
 
 	gotoxy(65, 21); cout << "Posicion = " << CantidadDatos << " / 2 = " << posicion;
 	for (int i = 0; i < Intervalo; i++)
@@ -541,7 +545,7 @@ void MODA() {
 		putchar('-');
 	}
 
-	gotoxy(72, 34); cout << "**MODA**";
+	gotoxy(72, 34); cout << "MODA";
 
 	gotoxy(65, 36); cout << "Posicion = " << CantidadDatos << " / 2 = " << posicion;
 
@@ -600,9 +604,7 @@ void MODA() {
 }
 void MEDIDASDISPERCION() {
 	int i;
-	float varianza = 0, desv_estandar = 0, media = 0, suma_valores = 0, desv_med = 0, desv_med2 = 0, coe_var;
-
-	Rango = nMayor - nMenor;
+	float varianza = 0, desv_estandar = 0, media = 0, suma_valores = 0, desv_med = 0, desv_med2 = 0, coe_var, xmediaf = 0;
 
 	for (i = 0; i < CantidadDatos; i++)
 	{
@@ -611,18 +613,16 @@ void MEDIDASDISPERCION() {
 
 	media = suma_valores / CantidadDatos;
 
-	for (i = 0; i < CantidadDatos; i++)
+	varianza = auxiXmPCF / (CantidadDatos - 1);
+
+	for (int i = 0; i < Intervalo; i++)
 	{
-		varianza = varianza + pow((Datos[i] - media), 2);
+		xmediaf = xmediaf + ((abs(marca_de_clase[i] - mcMprom2)) * Datos[i]);
 	}
 
-	for (i = 0; i < CantidadDatos; i++)
-	{
-		desv_med = desv_med + abs(Datos[i] - media);
-	}
-	desv_med2 = desv_med / CantidadDatos;
-	desv_estandar = sqrt(varianza / (CantidadDatos - 1));
-	coe_var = desv_estandar / media;
+	desv_med2 = xmediaf / CantidadDatos;
+	desv_estandar = sqrt(varianza);
+	coe_var = desv_estandar / mcMprom2;
 
 	system("cls");
 	for (int x = 0; x <= 171; x++)
@@ -666,7 +666,7 @@ void CUARTIL() {
 
 		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
 		{
-			gotoxy(72, 28); cout << "**CUARTIL**";
+			gotoxy(72, 28); cout << "CUARTIL";
 			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
@@ -697,7 +697,7 @@ void CUARTIL() {
 		{
 			if (aux == FrecuenciaAbsolutaAcumulada[i])
 			{
-				gotoxy(72, 28); cout << "**CUARTIL**";
+				gotoxy(72, 28); cout << "CUARTIL";
 				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
@@ -741,7 +741,7 @@ void DECIL() {
 
 		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
 		{
-			gotoxy(72, 28); cout << "**DECIL**";
+			gotoxy(72, 28); cout << "DECIL";
 			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
@@ -772,7 +772,7 @@ void DECIL() {
 		{
 			if (aux == FrecuenciaAbsolutaAcumulada[i])
 			{
-				gotoxy(72, 28); cout << "**DECIL**";
+				gotoxy(72, 28); cout << "DECIL";
 				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
@@ -816,7 +816,7 @@ void PERCENTIL() {
 
 		if (posicion2 == FrecuenciaAbsolutaAcumulada[i])
 		{
-			gotoxy(72, 28); cout << "**PERCENTIL**";
+			gotoxy(72, 28); cout << "PERCENTIL";
 			gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 			gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 			gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
@@ -847,7 +847,7 @@ void PERCENTIL() {
 		{
 			if (aux == FrecuenciaAbsolutaAcumulada[i])
 			{
-				gotoxy(72, 28); cout << "**PERCENTIL**";
+				gotoxy(72, 28); cout << "PERCENTIL";
 				gotoxy(65, 30); cout << " FRECUENCIA ABSOLUTA ACUMULADA: " << FrecuenciaAbsolutaAcumulada[i] << endl;
 				gotoxy(65, 31); cout << " FRECUENCIA ABSOLUTA ACUMULADA - 1: " << FrecuenciaAbsolutaAcumulada[i - 1] << endl;
 				gotoxy(65, 32); cout << " LIMITE INFERIOR: " << vectora[i] << endl;
